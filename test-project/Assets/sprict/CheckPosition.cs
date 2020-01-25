@@ -64,17 +64,21 @@ public class CheckPosition : MonoBehaviour
                 countCorrect++;
             }
         }
+        Debug.Log(handData.old_handdata.SequenceEqual(handData.handData));
         if (!handData.old_handdata.SequenceEqual(handData.handData))
         {
+            //Debug.Log("eee");
             setold_handdata();
             handData.score += 2 * 1.5 ;
-        }
-        if (countCorrect == 5)
-        {
-            handData.score += 2 * 1.5 * 2;
+            if (countCorrect == 5)
+            {
+                handData.score += 2 * 1.5 * 2;
 
-            reSpawnCheck = true;
+                reSpawnCheck = true;
+            }
         }
+       
+        
         //Debug.Log(countCorrect); 
 
     }

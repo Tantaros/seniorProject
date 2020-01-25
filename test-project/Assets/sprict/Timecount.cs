@@ -8,21 +8,20 @@ public class Timecount : MonoBehaviour
     public Text TimeCount;
     public Canvas overlay;
     public Text gameOver;
-    float timer;
+    public float timer;
+    public float timer2;
+    
     float delay;
-    public Image HPP;
-
-    private float start = 100;
-    private float health_p;
+    
 
     public GameObject obj;
     private HandData hp;
+
     
     // Start is called before the first frame update
     void Start()
     {
         hp = gameObject.GetComponent<HandData>();
-        
         delay = 3;
         timer = 60;
         SetText();
@@ -34,22 +33,30 @@ public class Timecount : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        DamageBoss();
-        if (timer <= 0)
+
+
+        if (timer <= 0 )
         {
             timer = 0;
             SetText();
-            health_p = start;
             overlay.gameObject.SetActive(true);
             gameOver.text = "GAME OVER";
         }
+        else if (hp.isWin == true)
+        {
+
+            timer2 = timer;
+            SetText2();
+
+        }
         else
         {
+            
             SetText();
 
         }
-        
+        timer -= Time.deltaTime;
+
     }
 
     void SetText()
@@ -67,27 +74,21 @@ public class Timecount : MonoBehaviour
             TimeCount.text = "00:" + timer.ToString("f0");
         }
     }
-    public void DamageBoss()
+
+    void SetText2()
     {
-        if ((hp.HPE / start) <= 1 && (timer % 5 <= 2))
+        if (timer <= 9.5)
         {
-            float mm = 5f;
-
-            hp.HPP -= mm;
-            HPP.fillAmount = hp.HPP / start;
+            TimeCount.text = "00:0" + timer2.ToString("f0");
         }
-        else if ((hp.HPE / start) < 0.5 && (timer % 5 <= 3.6))
+        else if (timer >= 59)
         {
-            float mm = 15f;
-
-            hp.HPP -= mm;
-            HPP.fillAmount = hp.HPP / start;
+            TimeCount.text = "01:00";
         }
-        if (hp.HPP <= 0)
+        else
         {
-            hp.isWin = false;
+            TimeCount.text = "00:" + timer2.ToString("f0");
         }
-        
-
     }
+
 }
