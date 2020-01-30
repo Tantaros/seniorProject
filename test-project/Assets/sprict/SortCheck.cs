@@ -7,7 +7,7 @@ public class SortCheck : MonoBehaviour
     public bool checkinitial;
     public int[] intialPos = new int[5];
     private int[] arr = new int[5];
-    int[] solution = new int[1000];
+    public int[,] solution = new int[100,100];
     int moveStep;
     int move;
     int checkMove;
@@ -29,7 +29,7 @@ public class SortCheck : MonoBehaviour
         intialPosition();
         Debug.Log(checkinitial);
         insertionSorting();
-        printArray();
+        //printArray();
 
     }
 
@@ -41,7 +41,7 @@ public class SortCheck : MonoBehaviour
             intialPosition();
             Debug.Log(checkinitial);
             insertionSorting();
-            printArray();
+            //printArray();
         }
     }
     public void intialPosition()
@@ -80,10 +80,15 @@ public class SortCheck : MonoBehaviour
     public void insertionSorting()
     {
         int key, i, j;
+        moveStep = 0;
         for (i = 1; i < arr.Length; i++)
         {
             key = arr[i];
             j = i - 1;
+            if (j >= 0 && arr[j] > key)
+            {
+                moveStep++;
+            }
 
             while (j >= 0 && arr[j] > key)
             {
@@ -91,12 +96,14 @@ public class SortCheck : MonoBehaviour
                 j = j - 1;
             }
             arr[j + 1] = key;
-            moveStep++;
+            
             for(j = 0; j < arr.Length;j++)
             {
-                solution[i * arr.Length + j] = arr[j];
+                solution[moveStep,j] = arr[j];
+                Debug.Log(moveStep + "-"+ solution[moveStep , j]);
             }
         }
+        handData.movestep_insertsort = moveStep;
         Debug.Log(moveStep);
     }
 
@@ -110,31 +117,35 @@ public class SortCheck : MonoBehaviour
 
    public void checkInsertSort()
    {
-        move = handData.moveCount;
         for(int i = 0; i < 5 ; i++)
         {
-            if(arr[move*5+i] == handData.handData[i])
+            if ( solution[move,i] == handData.handData[i])
             {
                 checkcorrectIn++;
+                Debug.Log("in");
             }
         }
         if(checkcorrectIn == 5)
         {
             checkMove++;
+            checkcorrectIn = 0;
+            Debug.Log("Sort"+checkMove);
         }
         else
         {
-            checkMove = 0;
+            checkcorrectIn = 0;
         }
         if(checkMove == moveStep)
         {
             isSort = true;
-            handData.score += 4 * 1.5 * 0.85;
+            Debug.Log("inseno");
+            handData.score += (50);
             checkMove = 0;
         }
         else
         {
             isSort = false;
+            checkMove = 0;
         }
    }
 

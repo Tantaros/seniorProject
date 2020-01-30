@@ -8,6 +8,7 @@ public class newSpawn : MonoBehaviour
     // Start is called before the first frame update
     public GameObject obj;
     float delay;
+    
 
     [Tooltip("Canvas to be the parent of spawned cards")]
     public Transform spawnTarget;
@@ -41,7 +42,8 @@ public class newSpawn : MonoBehaviour
         setHandData();
         reSwapn = checkPos.GetComponent<CheckPosition>();
         SortCheck = sort.GetComponent<SortCheck>();
-        reSwapn.checkCurrentPosition();
+        //reSwapn.checkCurrentPosition();
+        
     }
 
     // Update is called once per frame
@@ -69,6 +71,7 @@ public class newSpawn : MonoBehaviour
 
                 reSwapn.reSpawnCheck = false;
                 SortCheck.checkinitial = false;
+
                 delay = 0.5f;
             }
 

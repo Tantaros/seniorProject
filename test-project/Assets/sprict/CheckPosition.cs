@@ -12,32 +12,45 @@ public class CheckPosition : MonoBehaviour
     public int[] intialPos = new int[5];
     public int[] finalPos = new int[5];
     private bool[] arr = new bool[5];
-    int[] solution = new int[50];
+    
     int moveStep;
+    
     public bool reSpawnCheck;
+
+    private float delay;
+    public Canvas inseno;
+    
+    public int[,] solution = new int[100, 100];
+    int[] bb = new int[5];
+    int move;
+    int checkMove;
+    int checkcorrectIn;
+    public bool isSort = false;
 
     public Text ScoreText;
 
     public GameObject gameData;
-
     private HandData handData;
 
-
+    public GameObject sort;
+    private SortCheck sortCheck;
  
     //public List<GameObject> handata;
     // Start is called before the first frame update
     void Start()
     {
         handData = gameData.GetComponent<HandData>();
-        
-        SetText();
+        sortCheck = gameData.GetComponent<SortCheck>();
+        move = 1;
+        delay = 0.6f;
+        //SetText();
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetText();
-
+        //SetText();
+        
     }
 
 
@@ -64,15 +77,15 @@ public class CheckPosition : MonoBehaviour
                 countCorrect++;
             }
         }
-        Debug.Log(handData.old_handdata.SequenceEqual(handData.handData));
+        Debug.Log(!handData.old_handdata.SequenceEqual(handData.handData));
         if (!handData.old_handdata.SequenceEqual(handData.handData))
         {
             //Debug.Log("eee");
             setold_handdata();
-            handData.score += 2 * 1.5 ;
+            handData.score += 5 ;
             if (countCorrect == 5)
             {
-                handData.score += 2 * 1.5 * 2;
+                handData.score += 7;
 
                 reSpawnCheck = true;
             }
@@ -93,6 +106,84 @@ public class CheckPosition : MonoBehaviour
         handData.old_handdata = handData.handData;
     }
 
-    
+    public void checkInsertSort()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            //Debug.Log(sortCheck.solution[move, i]);
+            if (solution[move, i] == handData.handData[i])
+            {
+                checkcorrectIn++;
+                Debug.Log("in");
+            }
+        }
+        if (checkcorrectIn == 5)
+        {
+            checkMove++;
+            checkcorrectIn = 0;
+            move++;
+            Debug.Log("Sort" + checkMove);
+        }
+        else
+        {
+            checkcorrectIn = 0;
+            move = 0;
+        }
+        if (checkMove == handData.movestep_insertsort )
+        {
+            Debug.Log("inseno");
+            delay -= Time.deltaTime;
+            if (delay < 0.5f)
+            {
+                inseno.gameObject.SetActive(true);
+            }
+            if (delay <= 0.3f)
+            {
+                inseno.gameObject.SetActive(false);
+                delay = 0.6f;
+            }
+            
+            Debug.Log(checkMove);
+            Debug.Log(moveStep);
+            handData.score += (10);
+            checkMove = 0;
+        }
+        else
+        {
+            Debug.Log(checkMove+"-");
+            Debug.Log(moveStep + "-");
+            Debug.Log("not inseno");
+            checkMove = 0;
+        }
+    }
+
+    public void insertionSorting()
+    {
+        int key, i, j;
+        moveStep = 0;
+        for (i = 1; i < arr.Length; i++)
+        {
+            key = bb[i];
+            j = i - 1;
+            if (j >= 0 && bb[j] > key)
+            {
+                moveStep++;
+            }
+
+            while (j >= 0 && bb[j] > key)
+            {
+                bb[j + 1] = bb[j];
+                j = j - 1;
+            }
+            bb[j + 1] = key;
+
+            for (j = 0; j < arr.Length; j++)
+            {
+                solution[i, j] = bb[j];
+            }
+        }
+        handData.movestep_insertsort = moveStep;
+        Debug.Log(moveStep);
+    }
 
 }

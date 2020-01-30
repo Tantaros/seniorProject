@@ -70,7 +70,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         transform.parent.gameObject.GetComponent<DropZone>().updateHand();
         
         transform.parent.gameObject.GetComponent<CheckPosition>().checkCurrentPosition();
-
+        //transform.parent.gameObject.GetComponent<CheckPosition>().checkInsertSort();
         //transform.parent.gameObject.GetComponent<SortCheck>().checkInsertSort();
         transform.parent.gameObject.GetComponent<HP>().PlayerDamage();
         

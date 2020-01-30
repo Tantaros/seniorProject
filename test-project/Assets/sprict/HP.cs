@@ -9,10 +9,14 @@ public class HP : MonoBehaviour
     public Image HPE;
     public Image HPP;
     public Text TimeCount;
+    public Text scoreText;
     public Canvas overlay;
-    public Text gameOver;
+    public Canvas vic;
+    public Canvas pa;
+    
     public Image Emeny;
     public Image eff;
+    public Image[] dam = new Image[3];
     public bool isHalf = false;
 
     private float start = 100;
@@ -63,8 +67,8 @@ public class HP : MonoBehaviour
             }
             if(delay <= 0)
             {
-                overlay.gameObject.SetActive(true);
-                gameOver.text = "VICTORY";
+                vic.gameObject.SetActive(true);
+                scoreText.text = "Score : " + check.score;
             }
         }
         else
@@ -73,7 +77,11 @@ public class HP : MonoBehaviour
             {
                 SetText();
                 overlay.gameObject.SetActive(true);
-                gameOver.text = "GAME OVER";
+                
+            }
+            else if (pa.isActiveAndEnabled)
+            {
+                SetText();
             }
             else
             {
@@ -99,6 +107,21 @@ public class HP : MonoBehaviour
                     count++;
                 }
                 if (timer < 35 && count == 3)
+                {
+                    BossDamage();
+                    count++;
+                }
+                if (timer < 30 && count == 4)
+                {
+                    BossDamage();
+                    count++;
+                }
+                if (timer < 20 && count == 5)
+                {
+                    BossDamage();
+                    count++;
+                }
+                if (timer < 15 && count == 6)
                 {
                     BossDamage();
                     count++;
@@ -132,19 +155,31 @@ public class HP : MonoBehaviour
 
     public void BossDamage()
     {
-        if (check.HPE <= 50 && check.moveCount> 10)
+        if (check.HPE <= 50 || check.moveCount> 10)
         {
             float mm = (float)(30);
 
             check.HPP -= mm;
             HPP.fillAmount = check.HPP / start;
             check.HPE += mm;
-
+            if(check.HPE > 100)
+            {
+                check.HPE = 100;
+            }
             HPE.fillAmount = check.HPE / start;
+        }
+        else if (check.HPE>50 && count >= 4)
+        {
+            float mm = (float)(30);
+
+            check.HPP -= mm;
+            HPP.fillAmount = check.HPP / start;
+            //check.HPE += mm;
+            //HPE.fillAmount = check.HPE / start;
         }
         else
         {
-            float mm = (float)(10);
+            float mm = (float)(5);
 
             check.HPP -= mm;
             HPP.fillAmount = check.HPP / start;

@@ -13,6 +13,7 @@ public class HandData : MonoBehaviour
     public bool isWin;
     public float HPP;
     public float HPE;
+    public int movestep_insertsort;
     private HorizontalLayoutGroup handLayoutGroup;
 
     // Start is called before the first frame update
