@@ -42,6 +42,13 @@ public class newSpawn : MonoBehaviour
         setHandData();
         reSwapn = checkPos.GetComponent<CheckPosition>();
         SortCheck = sort.GetComponent<SortCheck>();
+        if(reSwapn.finalPos == handData.handData)
+        {
+            clearBoard();
+            Shuffle();
+            spawnCardBySpawnData();
+            setHandData();
+        }
         //reSwapn.checkCurrentPosition();
         
     }
@@ -56,21 +63,23 @@ public class newSpawn : MonoBehaviour
         //reSpawn();
         //Debug.Log(reSwapn.reSpawnCheck);
         
-        if (reSwapn.reSpawnCheck == true)
+        if (handData.reSpawnCheck == true || reSwapn.finalPos == handData.handData)
         {
             clearBoard();
             spawnCardTemp();
             delay -= Time.deltaTime;
             if (delay <= 0)
             {
+                handData.reSpawnCheck = false;
+                reSwapn.setold_handdata();
+                SortCheck.checkinitial = false;
+                SortCheck.isSort = false;
+                Debug.Log("SortCheck.checkinitial : "+ SortCheck.checkinitial);
                 clearBoard();
                 Shuffle();
                 spawnCardBySpawnData();
                 setHandData();
                 //checkPosition = checkPos.GetComponent<CheckPosition>();
-
-                reSwapn.reSpawnCheck = false;
-                SortCheck.checkinitial = false;
 
                 delay = 0.5f;
             }
@@ -89,6 +98,7 @@ public class newSpawn : MonoBehaviour
             spawnData[rnd] = spawnData[i];
             spawnData[i] = temp;
         }
+        
     }
     public void setHandData()
     {

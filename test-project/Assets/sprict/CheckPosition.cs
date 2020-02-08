@@ -9,40 +9,37 @@ public class CheckPosition : MonoBehaviour
     public bool[] checkPos = new bool[5];
     public int countCorrect;
     bool checkinitial;
-    public int[] intialPos = new int[5];
+    //public int[] intialPos = new int[5];
     public int[] finalPos = new int[5];
     private bool[] arr = new bool[5];
     
     int moveStep;
     
-    public bool reSpawnCheck;
-
-    private float delay;
-    public Canvas inseno;
     
-    public int[,] solution = new int[100, 100];
+
+    
+    //public int[,] solution = new int[100, 100];
     int[] bb = new int[5];
     int move;
     int checkMove;
     int checkcorrectIn;
-    public bool isSort = false;
+    public bool isSort;
 
     public Text ScoreText;
 
     public GameObject gameData;
     private HandData handData;
 
-    public GameObject sort;
-    private SortCheck sortCheck;
+    //public GameObject sort;
+    //private SortCheck sortCheck;
  
     //public List<GameObject> handata;
     // Start is called before the first frame update
     void Start()
     {
         handData = gameData.GetComponent<HandData>();
-        sortCheck = gameData.GetComponent<SortCheck>();
+        //sortCheck = gameData.GetComponent<SortCheck>();
         move = 1;
-        delay = 0.6f;
         //SetText();
     }
 
@@ -82,12 +79,12 @@ public class CheckPosition : MonoBehaviour
         {
             //Debug.Log("eee");
             setold_handdata();
-            handData.score += 5 ;
+            //handData.score += 5 ;
             if (countCorrect == 5)
             {
                 handData.score += 7;
 
-                reSpawnCheck = true;
+                handData.reSpawnCheck = true;
             }
         }
        
@@ -106,12 +103,12 @@ public class CheckPosition : MonoBehaviour
         handData.old_handdata = handData.handData;
     }
 
-    public void checkInsertSort()
+    /*public void checkInsertSort()
     {
         for (int i = 0; i < 5; i++)
         {
             //Debug.Log(sortCheck.solution[move, i]);
-            if (solution[move, i] == handData.handData[i])
+            if (handData.solution[move, i] == handData.handData[i])
             {
                 checkcorrectIn++;
                 Debug.Log("in");
@@ -155,9 +152,9 @@ public class CheckPosition : MonoBehaviour
             Debug.Log("not inseno");
             checkMove = 0;
         }
-    }
+    }*/
 
-    public void insertionSorting()
+    /*public void insertionSorting()
     {
         int key, i, j;
         moveStep = 0;
@@ -184,6 +181,6 @@ public class CheckPosition : MonoBehaviour
         }
         handData.movestep_insertsort = moveStep;
         Debug.Log(moveStep);
-    }
+    }*/
 
 }

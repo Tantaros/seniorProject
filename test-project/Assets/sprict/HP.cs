@@ -19,7 +19,8 @@ public class HP : MonoBehaviour
     public Image[] dam = new Image[3];
     public bool isHalf = false;
 
-    private float start = 100;
+    private float startP;
+    private float startE;
     private double sc = -888;
     private bool triggered = true;
     private float health_p;
@@ -43,6 +44,8 @@ public class HP : MonoBehaviour
     void Start()
     {
         check = score.GetComponent<HandData>();
+        startE = check.HPE;
+        startP = check.HPP;
         timer = 60;
         eff.enabled = false;
         delay = 0.6f;
@@ -140,7 +143,7 @@ public class HP : MonoBehaviour
 
             check.HPE -= amount;
 
-            HPE.fillAmount = check.HPE / start;
+            HPE.fillAmount = check.HPE / startE;
             sc = check.score;
             if (check.HPE <= 0 && !isDead)
             {
@@ -155,25 +158,25 @@ public class HP : MonoBehaviour
 
     public void BossDamage()
     {
-        if (check.HPE <= 50 || check.moveCount> 10)
+        if (check.HPE <= 20 || check.moveCount> 10)
         {
-            float mm = (float)(30);
+            float mm = (float)(10);
 
-            check.HPP -= mm;
-            HPP.fillAmount = check.HPP / start;
+            //check.HPP -= mm;
+            //PP.fillAmount = check.HPP / startP;
             check.HPE += mm;
-            if(check.HPE > 100)
+            if(check.HPE > startE)
             {
-                check.HPE = 100;
+                check.HPE = startE;
             }
-            HPE.fillAmount = check.HPE / start;
+            HPE.fillAmount = check.HPE / startP;
         }
-        else if (check.HPE>50 && count >= 4)
+        else if (check.HPE<50 && count >= 4)
         {
             float mm = (float)(30);
 
             check.HPP -= mm;
-            HPP.fillAmount = check.HPP / start;
+            HPP.fillAmount = check.HPP / startP;
             //check.HPE += mm;
             //HPE.fillAmount = check.HPE / start;
         }
@@ -182,7 +185,7 @@ public class HP : MonoBehaviour
             float mm = (float)(5);
 
             check.HPP -= mm;
-            HPP.fillAmount = check.HPP / start;
+            HPP.fillAmount = check.HPP / startP;
         }
 
         //hp.HPP = health_p;

@@ -14,13 +14,13 @@ public class exitcontroller : MonoBehaviour
     void Start()
     {
         q1.onClick.AddListener(delegate () {
-            SceneManager.LoadScene("submap-001"); // คลิกแล้วเปลี่ยนไปหน้า home
+            SceneManager.LoadScene("map-001"); 
         });
         q2.onClick.AddListener(delegate () {
-            SceneManager.LoadScene("submap-001"); // คลิกแล้วเปลี่ยนไปหน้า home
+            SceneManager.LoadScene("map-001"); 
         });
         q3.onClick.AddListener(delegate () {
-            SceneManager.LoadScene("submap-001"); // คลิกแล้วเปลี่ยนไปหน้า home
+            SceneManager.LoadScene("map-001"); 
         });
 
 

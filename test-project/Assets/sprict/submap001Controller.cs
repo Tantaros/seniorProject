@@ -9,11 +9,12 @@ public class submap001Controller : MonoBehaviour
     // Start is called before the first frame update
     public Button quest001;
     public Button map;
+    public Canvas submap001;
 
     void Start()
     {
         map.onClick.AddListener(delegate () {
-            SceneManager.LoadScene("map-001"); // คลิกแล้วเปลี่ยนไปหน้า about
+            submap001.gameObject.SetActive(false);
         });
         quest001.onClick.AddListener(delegate () {
             SceneManager.LoadScene("battle-001"); // คลิกแล้วเปลี่ยนไปหน้า about

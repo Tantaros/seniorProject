@@ -13,13 +13,13 @@ public class restart : MonoBehaviour
     void Start()
     {
         btnRe.onClick.AddListener(delegate () {
-            SceneManager.LoadScene("battle-001"); // คลิกแล้วเปลี่ยนไปหน้า home
+            SceneManager.LoadScene("battle-001"); 
         });
         btnRe2.onClick.AddListener(delegate () {
-            SceneManager.LoadScene("battle-001"); // คลิกแล้วเปลี่ยนไปหน้า home
+            SceneManager.LoadScene("battle-001"); 
         });
         btnRe3.onClick.AddListener(delegate () {
-            SceneManager.LoadScene("battle-001"); // คลิกแล้วเปลี่ยนไปหน้า home
+            SceneManager.LoadScene("battle-001"); 
         });
     }
 

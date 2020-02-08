@@ -14,6 +14,8 @@ public class HandData : MonoBehaviour
     public float HPP;
     public float HPE;
     public int movestep_insertsort;
+    public int[,] solution = new int[100, 100];
+    public bool reSpawnCheck;
     private HorizontalLayoutGroup handLayoutGroup;
 
     // Start is called before the first frame update
@@ -23,6 +25,7 @@ public class HandData : MonoBehaviour
         score = 0;
         moveCount = 0;
         setold_handdata();
+        reSpawnCheck = false;
     }
 
     // Update is called once per frame
